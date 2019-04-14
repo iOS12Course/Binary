@@ -47,10 +47,24 @@ class ViewController: UIViewController {
     }
 
     @IBAction func binaryBtnWasPressed(_ sender: Any) {
-       
+        if valueEntrytextField.text != "" {
+            binaryBtn.alpha = 1.0
+            decimalBtn.alpha = 0.5
+            guard let string = valueEntrytextField.text , let intFromString = Int(string) else { return }
+            let binaryDigit = BinaryDecimal(intFromString)
+            valueEntrytextField.text = "\(binaryDigit.calculateBinaryValueForInt())"
+        }
     }
     
     @IBAction func decimalBtnWasPressed(_ sender: Any) {
+        if valueEntrytextField.text != "" {
+            binaryBtn.alpha = 0.5
+            decimalBtn.alpha = 1.0
+            guard let string = valueEntrytextField.text else { return }
+            let bitsFromString = string.map { Int(String($0))! }
+            let binaryDigit = BinaryDecimal(bitsFromString)
+            valueEntrytextField.text = "\(binaryDigit.calculateIntValueForBinary())"
+        }
     }
     
 
